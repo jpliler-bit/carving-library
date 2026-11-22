@@ -167,3 +167,105 @@ class MokkoCartouche(Element):
 
     def extent(self, size, height=0.90, **_):
         return (-size * 50, -height * 50, size * 50, height * 50)
+
+
+def _clip_open(uid, x0, y0, w, h):
+    return [f'<clipPath id="{uid}"><rect x="{f(x0)}" y="{f(y0)}" width="{f(w)}" height="{f(h)}"/></clipPath>',
+            f'<g clip-path="url(#{uid})"><rect x="{f(x0)}" y="{f(y0)}" width="{f(w)}" height="{f(h)}" fill="{WHITE}"/>']
+
+
+@register
+class Kikko(Element):
+    name = "kikko"
+    category = "fills"
+    description = ("Kikko (tortoise-shell) panel: tessellated hexagons, each with an inner hexagon. A symbol of long "
+                   "life. Outer lines are cuts; the inner hexagons are decorative cuts or a hex stamp. Centred on the origin.")
+    size_note = "panel length (height from the panel, option 'height')"
+    size_default, size_min, size_max = 1.2, 0.4, 12.0
+    layer = 25
+
+    def draw(self, size, height=1.18, scale=0.20, uid="kk", **_):
+        import math as m
+        w, h, a = size * 100, height * 100, scale * 100
+        x0, y0, x1, y1 = -w / 2, -h / 2, w / 2, h / 2
+        out = _clip_open(uid, x0, y0, w, h)
+        dx, dy = m.sqrt(3) * a, 1.5 * a
+
+        def hexagon(cx, cy, r):
+            return " ".join(f"{f(cx + r * m.cos(m.radians(60 * k - 90)))},{f(cy + r * m.sin(m.radians(60 * k - 90)))}" for k in range(6))
+        rows = int(h / dy) + 3
+        cols = int(w / dx) + 3
+        for r in range(-rows // 2 - 1, rows // 2 + 2):
+            for c in range(-cols // 2 - 1, cols // 2 + 2):
+                cx = c * dx + (dx / 2 if r % 2 else 0)
+                cy = r * dy
+                out.append(f'<polygon points="{hexagon(cx, cy, a)}" fill="none" stroke="{INK}" stroke-width="{LINE}" stroke-linejoin="round"/>')
+                out.append(f'<polygon points="{hexagon(cx, cy, a * 0.70)}" fill="none" stroke="{INK}" stroke-width="{FINE}" stroke-linejoin="round"/>')
+        out.append("</g>")
+        out.append(path(f"M{f(x0)},{f(y0)} L{f(x1)},{f(y0)} L{f(x1)},{f(y1)} L{f(x0)},{f(y1)} Z", fill="none"))
+        return "\n".join(out)
+
+    def flow(self, size, **_):
+        return []
+
+    def extent(self, size, height=1.18, **_):
+        return (-size * 50, -height * 50, size * 50, height * 50)
+
+
+@register
+class Shippo(Element):
+    name = "shippo"
+    category = "fills"
+    description = ("Shippo (seven treasures) panel: overlapping circles, four meeting at every point, so each circle "
+                   "splits into four pointed petals around a star-shaped gap. Centred on the origin.")
+    size_note = "panel length (height from the panel, option 'height')"
+    size_default, size_min, size_max = 1.2, 0.4, 12.0
+    layer = 25
+
+    def draw(self, size, height=1.18, scale=0.24, uid="sp", **_):
+        import math as m
+        w, h, d = size * 100, height * 100, scale * 100
+        x0, y0, x1, y1 = -w / 2, -h / 2, w / 2, h / 2
+        out = _clip_open(uid, x0, y0, w, h)
+        r = d / m.sqrt(2)
+        for i in range(-int(w / d) // 2 - 2, int(w / d) // 2 + 3):
+            for j in range(-int(h / d) // 2 - 2, int(h / d) // 2 + 3):
+                out.append(f'<circle cx="{f(i * d)}" cy="{f(j * d)}" r="{f(r)}" fill="none" stroke="{INK}" stroke-width="{LINE}"/>')
+        out.append("</g>")
+        out.append(path(f"M{f(x0)},{f(y0)} L{f(x1)},{f(y0)} L{f(x1)},{f(y1)} L{f(x0)},{f(y1)} Z", fill="none"))
+        return "\n".join(out)
+
+    def flow(self, size, **_):
+        return []
+
+    def extent(self, size, height=1.18, **_):
+        return (-size * 50, -height * 50, size * 50, height * 50)
+
+
+@register
+class MaruRing(Element):
+    name = "maru_ring"
+    category = "frames"
+    description = ("Maru ring: the round frame of a Japanese family crest (kamon). Put a flower or leaf inside it, or "
+                   "three leaves with a radial layout. Double outline; the ring itself is raised.")
+    size_note = "outer diameter"
+    size_default, size_min, size_max = 1.30, 0.60, 4.00
+    layer = 55
+
+    def draw(self, size, thickness=0.10, **_):
+        R = size * 50
+        t = thickness * 100
+        ring = (f"M{f(R)},0 A{f(R)},{f(R)} 0 1 0 {f(-R)},0 A{f(R)},{f(R)} 0 1 0 {f(R)},0 Z "
+                f"M{f(R - t)},0 A{f(R - t)},{f(R - t)} 0 1 1 {f(-(R - t))},0 A{f(R - t)},{f(R - t)} 0 1 1 {f(R - t)},0 Z")
+        return (path(ring, extra='fill-rule="evenodd"') +
+                f'<circle cx="0" cy="0" r="{f(R - t / 2)}" fill="none" stroke="{INK}" stroke-width="{FINE}"/>')
+
+    def anchors(self, size, **_):
+        R = size * 50
+        return {"top": (0, -R, -90), "bottom": (0, R, 90), "left": (-R, 0, 180), "right": (R, 0, 0)}
+
+    def flow(self, size, **_):
+        return [(0, 0, 0.6)]
+
+    def extent(self, size, **_):
+        return (-size * 50, -size * 50, size * 50, size * 50)

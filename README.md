@@ -75,7 +75,7 @@ Otherwise give a shape:
 `{shape: rect, x: [x0, x1], y: [y0, y1], radius}`, `{shape: circle, center: [x, y], r}`,
 `{shape: oval, center, rx, ry}`, `{shape: inset, margin}` (product outline shrunk), or
 `{shape: strap, start, length, border, ends: square|pointed|round|ogee}` for belts and straps.
-Each panel takes `ground: knife_marks|matte|none` and `border_style: line|double|beaded|none`.
+Each panel takes `ground: knife_marks|matte|none` and `border_style: line|double|beaded|rope|none`.
 
 **Layouts** (each group takes `panel:`, `place:`, and optionally `stems:` and `connect:`):
 
@@ -125,6 +125,12 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 | `sakura`, `sakura_petal` | Cherry blossom and falling petal |
 | `ume` | Plum blossom: five round petals, long stamens; carves well small |
 | `kiku` | Chrysanthemum |
+| `lotus` | Lotus (renge), side view: fan of pointed petals on a crescent receptacle |
+| `momiji` | Japanese maple leaf: seven toothed lobes, veins, stem |
+| `ginkgo` | Ginkgo fan leaf with a centre notch and radiating veins |
+| `bamboo` | Jointed bamboo stalk with two sprays of narrow leaves |
+| `nami_crest` | Wave crest: a swelling band that curls over, with foam claws |
+| `tombo` | Dragonfly seen from above (the samurai "victory insect") |
 
 **Western / Sheridan**
 
@@ -133,6 +139,10 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 | `sheridan_rose` | Wild rose: rolled-edge outer petals, cupped inner petals, crown and seeded centre |
 | `sheridan_leaf` | Curved leaf, smooth back, four swept lobes, tip that flips up |
 | `rose_bud` | Pointed bud sitting in a calyx |
+| `oak_leaf` | Lobed oak leaf with midrib and veins |
+| `acorn` | Acorn with a crosshatched cap and stem |
+| `daisy` | Two rings of narrow petals around a large seeded centre |
+| `feather` | Curved quill, split vane, fine barb cuts |
 
 **Fills and frames**
 
@@ -141,6 +151,9 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 | `seigaiha` | Wave-scale panel |
 | `asanoha` | Hemp-leaf star panel |
 | `basketweave` | Basket-weave layout panel (stamp with a basket stamp) |
+| `kikko` | Tortoise-shell hexagons with inner hexagons |
+| `shippo` | Overlapping circles (seven treasures) |
+| `maru_ring` | Round crest frame (kamon ring); put a motif or a radial set of leaves inside |
 | `mokko_cartouche` | Four-lobed name frame for initials or a name (option `text` shows a grey placement guide) |
 
 To add an element: copy a class from `carvelib/elements/`, give it a new `name`, draw it around

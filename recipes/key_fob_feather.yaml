@@ -1,0 +1,24 @@
+# Loop key fob, Western: a feather on the face half, an acorn on the back half. Matte ground.
+
+name: Key fob - feather
+
+product: {type: key_fob, width: 5.0, height: 1.0}
+
+panels:
+  face: {ground: matte, border_style: line}
+  back: {ground: matte, border_style: line}
+
+finishes: [natural_antique, saddle_tan, medium_brown]
+
+layout:
+  - type: single
+    panel: face
+    origin: [0.88, 0]
+    place:
+      - {element: feather, at: [0, 0.04], rotate: -6, size: 1.30}
+  - type: single
+    panel: back
+    origin: [3.43, 0]
+    place:
+      - {element: oak_leaf, at: [-0.62, 0.05], rotate: -12, size: 0.78}
+      - {element: acorn, at: [0.42, 0.02], rotate: 20, size: 0.48}

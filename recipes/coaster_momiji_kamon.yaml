@@ -1,0 +1,25 @@
+# 4" coaster in the style of a family crest (kamon): three maple leaves meeting at the centre inside a
+# maru ring, with eight ginkgo leaves around the outside. Two radial layouts.
+
+name: Coaster - momiji kamon
+
+product: {type: coaster, width: 4.0, margin: 0.20}
+
+panels:
+  main: {ground: knife_marks, border_style: rope}
+
+layout:
+  - type: single
+    origin: [2.0, 0]
+    place:
+      - {element: maru_ring, at: [0, 0], size: 2.30, thickness: 0.12}
+  - type: radial            # three leaves, stems toward the centre, tips outward
+    count: 3
+    start_angle: -90
+    place:
+      - {element: momiji, at: [0.40, 0], rotate: 90, size: 0.88}
+  - type: radial
+    count: 8
+    start_angle: -67.5
+    place:
+      - {element: ginkgo, at: [1.30, 0], rotate: 90, size: 0.55}

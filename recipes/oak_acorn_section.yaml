@@ -1,0 +1,33 @@
+# Western test section: oak leaves and a hanging pair of acorns on a waving vine, scrolls at the
+# ends, rope border. One 4.6" repeat on a 5.2" x 1.5" blank; matte ground.
+
+name: Oak and acorn section
+
+product: {type: blank, width: 1.5, length: 5.2, crease: false}
+
+panels:
+  main: {shape: strap, start: 0.3, length: 4.6, border: 0.12, ground: matte, border_style: rope}
+
+finishes: [natural_antique, saddle_tan, medium_brown]
+
+layout:
+  - type: repeat
+    start: 0.3
+    length: 4.6
+    count: 1
+    stems:
+      - points: [[0, 0.20], [0.575, 0.14], [1.15, 0], [1.725, -0.14], [2.3, -0.20],
+                 [2.875, -0.14], [3.45, 0], [4.025, 0.14], [4.6, 0.20]]
+        width: 0.11
+    place:
+      - {element: guri_scroll, at: [0.50, 0.15], rotate: -28, size: 0.90}
+      - {element: guri_scroll, at: [4.10, 0.15], rotate: 208, size: 0.90, flip_y: true}
+      - {element: oak_leaf, at: [1.20, -0.02], rotate: -36, size: 0.80}
+      - {element: oak_leaf, at: [3.40, -0.02], rotate: 216, size: 0.80, flip_y: true}
+      - {element: oak_leaf, at: [1.62, -0.10], rotate: 128, size: 0.62, flip_y: true}
+      - {element: oak_leaf, at: [2.98, -0.10], rotate: 52, size: 0.62}
+      - {id: ac1, element: acorn, at: [2.12, 0.24], rotate: 12, size: 0.46}
+      - {id: ac2, element: acorn, at: [2.50, 0.26], rotate: -14, size: 0.46}
+    connect:
+      - {from: [2.24, -0.19], to: ac1.stem, start_dir: 110, width: 0.05, end_width: 0.04, line: false}
+      - {from: [2.36, -0.19], to: ac2.stem, start_dir: 70, width: 0.05, end_width: 0.04, line: false}

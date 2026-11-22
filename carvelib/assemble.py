@@ -299,7 +299,7 @@ class Design:
             o.append(path(poly_d(inset(poly, 7)), fill="none", sw=FINE))
         elif style == "beaded":
             # a raised strip just inside the edge carries the beads; its inner edge is a cut line
-            o.append(f'<path d="{poly_d(poly)}" fill="none" stroke="#fff" stroke-width="24"/>')
+            o.append(f'<path d="{poly_d(inset(poly, 6, 0))}" fill="none" stroke="#fff" stroke-width="12"/>')
             o.append(path(poly_d(poly), fill="none", sw=LINE))
             o.append(path(poly_d(inset(poly, 12, 0)), fill="none", sw=LINE))
             ln = LineString_ring(inset(poly, 6, 0))
@@ -307,6 +307,24 @@ class Design:
             for k in range(n):
                 p = ln.interpolate(k / n, normalized=True)
                 o.append(f'<circle cx="{f(p.x)}" cy="{f(p.y)}" r="2.6" fill="#fff" stroke="{INK}" stroke-width="{FINE}"/>')
+        elif style == "rope":
+            o.append(f'<path d="{poly_d(inset(poly, 6.5, 0))}" fill="none" stroke="#fff" stroke-width="13"/>')
+            o.append(path(poly_d(poly), fill="none", sw=LINE))
+            o.append(path(poly_d(inset(poly, 13, 0)), fill="none", sw=LINE))
+            ln = LineString_ring(inset(poly, 6.5, 0))
+            n = max(10, int(ln.length / 7))
+            for k in range(n):
+                p = ln.interpolate(k / n, normalized=True)
+                q = ln.interpolate((k + 0.3) / n, normalized=True)
+                tx, ty = q.x - p.x, q.y - p.y
+                m = math.hypot(tx, ty) or 1
+                tx, ty = tx / m, ty / m
+                nx, ny = -ty, tx
+                a0 = (p.x - nx * 5.5 - tx * 3.5, p.y - ny * 5.5 - ty * 3.5)
+                a1 = (p.x + nx * 5.5 + tx * 3.5, p.y + ny * 5.5 + ty * 3.5)
+                c = (p.x + tx * 2.2, p.y + ty * 2.2)
+                o.append(f'<path d="M{f(a0[0])},{f(a0[1])} Q{f(c[0])},{f(c[1])} {f(a1[0])},{f(a1[1])}" fill="none" '
+                         f'stroke="{INK}" stroke-width="{FINE}" stroke-linecap="round"/>')
         return "\n".join(o)
 
     def body(self):
