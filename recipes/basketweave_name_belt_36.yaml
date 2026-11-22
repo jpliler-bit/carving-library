@@ -1,0 +1,18 @@
+# Basket-weave belt with a mokko name cartouche at the back centre.
+# Back centre sits about halfway between the buckle fold and the centre hole (~16" here).
+# Replace NAME with the customer's name or initials; stamp it with a 3D-printed name stamp.
+
+name: Basketweave name belt 1.5 x 36
+
+product:
+  type: belt
+  width: 1.5
+  length: 36
+  tip: round
+  buckle_slot: 1.5
+  keeper: 2.5
+  holes: {first: 29, count: 5, spacing: 1.0}
+
+extras:
+  - {element: basketweave, at: [16.5, 0], size: 23.0, height: 1.18}
+  - {element: mokko_cartouche, at: [16.5, 0], size: 2.2, height: 1.0, text: NAME, layer: 70}

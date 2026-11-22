@@ -1,0 +1,26 @@
+# Kamakura-bori inspired test section #2: camellia between guri pommels, with cloud scrolls,
+# karakusa tendrils and a plum blossom. One 4.6" repeat on a 5.2" x 1.5" blank.
+
+name: Camellia and cloud section
+
+product: {type: blank, width: 1.5, length: 5.2, crease: false}
+
+panel: {start: 0.3, border: 0.16, ends: square, ground: knife_marks}
+
+repeat:
+  length: 4.6
+  count: 1
+  stems:
+    - points: [[0, 0], [0.30, 0], [0.70, 0.01], [1.10, 0.03], [1.50, 0.02], [1.90, 0.01], [2.30, 0],
+               [2.70, -0.01], [3.10, -0.02], [3.50, -0.03], [3.90, -0.01], [4.30, 0], [4.60, 0]]
+      width: 0.125
+  place:
+    - {element: guri_pommel, at: [0.30, 0], size: 0.95}
+    - {element: guri_pommel, at: [4.30, 0], rotate: 180, size: 0.95}
+    - {element: sheath, at: [0.30, 0], flip_x: true}
+    - {element: sheath, at: [4.30, 0.0]}
+    - {element: cloud_scroll, at: [1.80, 0.40], size: 0.70, rotate: 6, flip_y: true}
+    - {element: cloud_scroll, at: [2.80, -0.40], size: 0.70, rotate: 186, flip_y: true}
+    - {element: karakusa_tendril, at: [1.42, -0.02], rotate: -35, size: 0.62}
+    - {element: karakusa_tendril, at: [3.18, 0.02], rotate: 145, size: 0.62}
+    - {element: camellia, at: [2.30, 0.0], size: 1.05}

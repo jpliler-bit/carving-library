@@ -26,7 +26,7 @@ def run(d, out_png):
     cfg = {**DEFAULTS, **d.r.get("check", {})}
     body = uniquify(d.body(), "_c")
     # ground black, motifs white, every line white (lines are cuts, not ground or raised area)
-    mask_body = body.replace(BG, "#000000").replace(f'stroke="{MARK}"', 'stroke="#000000"')
+    mask_body = body.replace(BG, "#000000").replace(MARK, "#000000")
     mask_body = mask_body.replace('stroke="#111"', 'stroke="#fff"').replace('fill="#111"', 'fill="#fff"')
     for c in ("#c0392b", "#777", "#555"):
         mask_body = mask_body.replace(f'stroke="{c}"', 'stroke="none"')
@@ -56,12 +56,16 @@ def run(d, out_png):
         out[mask] = out[mask] * 0.25 + np.array(col) * 0.75
     Image.fromarray(out.astype(np.uint8)).save(out_png)
 
-    g = ground.sum() or 1
+    if ground.sum() == 0:
+        return "Carvability check: no carved panel with open ground in this design (fills and stamped areas only).\n"
+    g = ground.sum()
+    tool = ("the knife-mark stamp" if d.r.get("panel", {}).get("ground", "knife_marks") == "knife_marks"
+            else "a standard backgrounder")
     n_tight = ndimage.label(tight)[1]
     n_thin = ndimage.label(thin)[1]
     lines = [
         f"Carvability check (tools: min gap {cfg['min_gap']}\", stamp reach {cfg['stamp_reach']}\", min raised width {cfg['min_feature']}\")",
-        f"  Ground reachable with the knife-mark stamp: {100 * (ground & stamp_ok).sum() / g:.0f}%",
+        f"  Ground reachable with {tool}: {100 * (ground & stamp_ok).sum() / g:.0f}%",
         f"  Ground needing a small backgrounder (orange): {100 * small_tool.sum() / g:.0f}%",
         f"  Gaps too tight for any backgrounder (red): {n_tight} spot(s), {100 * tight.sum() / g:.1f}% of ground",
         f"  Thin raised parts (blue): {n_thin} spot(s) - mostly scroll tails and petal tips; bevel these lightly",

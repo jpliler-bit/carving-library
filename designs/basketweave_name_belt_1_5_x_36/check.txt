@@ -1,0 +1,1 @@
+Carvability check: no carved panel with open ground in this design (fills and stamped areas only).

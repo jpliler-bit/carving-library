@@ -11,7 +11,7 @@ from . import elements  # noqa: F401  (registers elements)
 from .element import REGISTRY
 from .geometry import Xf, f, path, catmull, BG, HARDWARE, INK, LINE
 from .connectors import stem_svg, ribbon_svg, connect
-from .ground import knife_marks
+from .ground import knife_marks, matte
 
 PLACE_KEYS = {"element", "at", "size", "rotate", "flip_x", "flip_y", "id", "layer", "every", "offset", "skip_first", "in_panel"}
 
@@ -38,8 +38,8 @@ class Design:
             raise KeyError(f"unknown element '{spec['element']}'. Library has: {', '.join(sorted(REGISTRY))}")
         size = el.check_size(spec.get("size"))
         opts = {k: v for k, v in spec.items() if k not in PLACE_KEYS}
-        if el.name == "seigaiha":
-            opts.setdefault("uid", f"sg{next(self.uid)}")
+        if el.category == "fills":
+            opts.setdefault("uid", f"fill{next(self.uid)}")
             opts.setdefault("height", (self.W - 2 * self.r.get("panel", {}).get("border", 0.16) * 100) / 100)
         x, y = spec["at"]
         xf = Xf(dx + x * 100, self.cy + y * 100, spec.get("rotate", 0), spec.get("flip_x", False), spec.get("flip_y", False))
@@ -133,7 +133,18 @@ class Design:
         x0 = pn["start"] * 100
         x1 = x0 + pn.get("length", self.r["repeat"]["length"] * self.r["repeat"].get("count", 1)) * 100
         t, btm, cy = b, self.W - b, self.cy
-        if pn.get("ends", "square") == "pointed":
+        ends = pn.get("ends", "square")
+        if ends == "round":
+            rr = (btm - t) / 2
+            return (f"M{f(x0)},{f(t)} L{f(x1)},{f(t)} A{f(rr)},{f(rr)} 0 0 1 {f(x1)},{f(btm)} L{f(x0)},{f(btm)} "
+                    f"A{f(rr)},{f(rr)} 0 0 1 {f(x0)},{f(t)} Z"), (x0 - rr, x1 + rr, t, btm)
+        if ends == "ogee":
+            e = 52
+            return (f"M{f(x0)},{f(t)} L{f(x1)},{f(t)} C{f(x1+e*0.55)},{f(t)} {f(x1+e*0.2)},{f(cy-10)} {f(x1+e)},{f(cy)} "
+                    f"C{f(x1+e*0.2)},{f(cy+10)} {f(x1+e*0.55)},{f(btm)} {f(x1)},{f(btm)} L{f(x0)},{f(btm)} "
+                    f"C{f(x0-e*0.55)},{f(btm)} {f(x0-e*0.2)},{f(cy+10)} {f(x0-e)},{f(cy)} "
+                    f"C{f(x0-e*0.2)},{f(cy-10)} {f(x0-e*0.55)},{f(t)} {f(x0)},{f(t)} Z"), (x0 - e, x1 + e, t, btm)
+        if ends == "pointed":
             return (f"M{f(x0)},{f(t)} L{f(x1)},{f(t)} C{f(x1+22)},{f(t)} {f(x1+30)},{f(cy-28)} {f(x1+36)},{f(cy)} "
                     f"C{f(x1+30)},{f(cy+28)} {f(x1+22)},{f(btm)} {f(x1)},{f(btm)} L{f(x0)},{f(btm)} "
                     f"C{f(x0-22)},{f(btm)} {f(x0-30)},{f(cy+28)} {f(x0-36)},{f(cy)} "
@@ -177,8 +188,11 @@ class Design:
             o.append(f'<clipPath id="{cid}"><path d="{pd}"/></clipPath>')
             o.append(path(pd, fill=BG, sw=LINE))
             o.append(f'<g clip-path="url(#{cid})">')
-            if self.r["panel"].get("ground", "knife_marks") == "knife_marks":
+            ground = self.r["panel"].get("ground", "knife_marks")
+            if ground == "knife_marks":
                 o.append(knife_marks(x0, x1, t, b, self.flows, seed=self.r["panel"].get("seed", 5)))
+            elif ground == "matte":
+                o.append(matte(x0, x1, t, b))
             o += [svg for _, _, svg, inp in sorted(self.items) if inp]
             o.append("</g>")
             o.append(path(pd, fill="none", sw=LINE))

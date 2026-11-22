@@ -12,7 +12,7 @@ def _project(X, Y, Z, s):
     return (X * s, (Y * math.sin(BETA) - Z * math.cos(BETA)) * s), Y * math.cos(BETA) + Z * math.sin(BETA)
 
 
-def _petal3d(a, r_in, ln, theta, W, notches, cup):
+def _petal3d(a, r_in, ln, theta, W, notches, cup, round_tip=0.08):
     ca, sa = math.cos(a), math.sin(a)
     tx, ty = -sa, ca
 
@@ -22,14 +22,15 @@ def _petal3d(a, r_in, ln, theta, W, notches, cup):
         z = u * ln * math.sin(theta) * (1 - dip) + cup * (t * t) * w
         return rho * ca + tx * t * w, rho * sa + ty * t * w, z
 
-    pts = [P(i / 7 * 0.92, -1) for i in range(7)]
+    e = 1 - round_tip
+    pts = [P(i / 7 * e, -1) for i in range(7)]
     m = 8 * (notches + 1)
     for i in range(m + 1):
         t = -1 + 2 * i / m
-        u = 0.92 + 0.08 * math.cos(t * math.pi / 2)
+        u = e + round_tip * math.cos(t * math.pi / 2) ** 0.8
         dip = 0.07 * (1 - abs(math.sin(math.pi * (notches + 1) * (t + 1) / 2))) ** 1.6
         pts.append(P(u, t, dip))
-    pts += [P(i / 7 * 0.92, 1) for i in range(6, -1, -1)]
+    pts += [P(i / 7 * e, 1) for i in range(6, -1, -1)]
     veins = [[P(u, d) for u in (0.22, 0.48, 0.70)] for d in (-0.38, 0.0, 0.38)]
     return pts, veins, P(0.55, 0)
 

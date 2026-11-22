@@ -13,7 +13,11 @@ CELL_W, CELL_H = 500, 215
 
 
 def _opts(el):
-    return {"uid": f"sg_{el.name}"} if el.name == "seigaiha" else {}
+    if el.category == "fills":
+        return {"uid": f"fill_{el.name}"}
+    if el.name == "mokko_cartouche":
+        return {"text": "JPL"}
+    return {}
 
 
 def element_svg(el, size=None, anchors=True):

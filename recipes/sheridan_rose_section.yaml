@@ -1,0 +1,31 @@
+# Sheridan-style test section: wild rose on a waving vine, with scrolls, scalloped leaves and buds.
+# One 4.6" repeat on a 5.2" x 1.5" blank; matte (backgrounder) ground.
+
+name: Sheridan rose section
+
+product: {type: blank, width: 1.5, length: 5.2, crease: false}
+
+panel: {start: 0.3, border: 0.16, ends: square, ground: matte}
+
+finishes: [natural_antique, saddle_tan, medium_brown]
+
+repeat:
+  length: 4.6
+  count: 1
+  stems:
+    - points: [[0, 0.25], [0.575, 0.177], [1.15, 0], [1.725, -0.177], [2.3, -0.25],
+               [2.875, -0.177], [3.45, 0], [4.025, 0.177], [4.6, 0.25]]
+      width: 0.11
+  place:
+    - {element: guri_scroll, at: [0.55, 0.19], rotate: -25, size: 0.95}
+    - {element: guri_scroll, at: [4.05, 0.19], rotate: 205, size: 0.95, flip_y: true}
+    - {element: sheridan_leaf, at: [1.70, -0.10], rotate: 150, size: 0.80, flip_y: true}
+    - {element: sheridan_leaf, at: [2.90, -0.10], rotate: 30, size: 0.80}
+    - {id: bud_l, element: rose_bud, at: [1.48, 0.33], rotate: 150, size: 0.38}
+    - {id: bud_r, element: rose_bud, at: [3.12, 0.33], rotate: 30, size: 0.38}
+    - {element: sheridan_leaf, at: [0.98, 0.04], rotate: 140, size: 0.55}
+    - {element: sheridan_leaf, at: [3.62, 0.04], rotate: 40, size: 0.55, flip_y: true}
+    - {element: sheridan_rose, at: [2.30, 0.02], size: 1.12}
+  connect:
+    - {from: [1.80, -0.17], to: bud_l.base, start_dir: 110, width: 0.06, end_width: 0.05, line: false}
+    - {from: [2.80, -0.17], to: bud_r.base, start_dir: 70, width: 0.06, end_width: 0.05, line: false}

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1.6in" height="1.58in" viewBox="-80 -79 160 158"><rect x="-80" y="-79" width="160" height="158" fill="#fff"/><clipPath id="sg_seigaiha"><rect x="-60" y="-59" width="120" height="118"/></clipPath>
-<g clip-path="url(#sg_seigaiha)">
+<svg xmlns="http://www.w3.org/2000/svg" width="1.6in" height="1.58in" viewBox="-80 -79 160 158"><rect x="-80" y="-79" width="160" height="158" fill="#fff"/><clipPath id="fill_seigaiha"><rect x="-60" y="-59" width="120" height="118"/></clipPath>
+<g clip-path="url(#fill_seigaiha)">
 <circle cx="-102" cy="-80" r="21" fill="#fff" stroke="#111" stroke-width="1.6"/>
 <circle cx="-102" cy="-80" r="14.28" fill="#fff" stroke="#111" stroke-width="0.9"/>
 <circle cx="-102" cy="-80" r="7.56" fill="#fff" stroke="#111" stroke-width="0.9"/>

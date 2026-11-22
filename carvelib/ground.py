@@ -35,3 +35,19 @@ def knife_marks(x0, x1, y0, y1, centers, seed=5):
         y += 8
         row += 1
     return "\n".join(out)
+
+
+def matte(x0, x1, y0, y1, seed=7, spacing=5.5):
+    """Sheridan-style backgrounder texture: fine stipple. Shown in grey: matt it, don't trace it."""
+    rnd = random.Random(seed)
+    out = []
+    y = y0 + 2
+    row = 0
+    while y < y1:
+        x = x0 + (row % 2) * spacing / 2
+        while x < x1:
+            out.append(f'<circle cx="{f(x + rnd.uniform(-1.2, 1.2))}" cy="{f(y + rnd.uniform(-1.2, 1.2))}" r="0.75" fill="{MARK}"/>')
+            x += spacing
+        y += spacing * 0.87
+        row += 1
+    return "\n".join(out)

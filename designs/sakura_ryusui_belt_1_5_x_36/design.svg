@@ -2711,8 +2711,8 @@
 <circle cx="-3.71" cy="-11.41" r="1.9" fill="#111"/></g>
 </g>
 <path d="M500,16 L2800,16 C2822,16 2830,47 2836,75 C2830,103 2822,134 2800,134 L500,134 C478,134 470,103 464,75 C470,47 478,16 500,16 Z" fill="none" stroke="#111" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" />
-<g transform="translate(360 75)"><clipPath id="sg0"><rect x="-60" y="-59" width="120" height="118"/></clipPath>
-<g clip-path="url(#sg0)">
+<g transform="translate(360 75)"><clipPath id="fill0"><rect x="-60" y="-59" width="120" height="118"/></clipPath>
+<g clip-path="url(#fill0)">
 <circle cx="-102" cy="-80" r="21" fill="#fff" stroke="#111" stroke-width="1.6"/>
 <circle cx="-102" cy="-80" r="14.28" fill="#fff" stroke="#111" stroke-width="0.9"/>
 <circle cx="-102" cy="-80" r="7.56" fill="#fff" stroke="#111" stroke-width="0.9"/>
@@ -2955,8 +2955,8 @@
 <circle cx="87" cy="77.5" r="7.56" fill="#fff" stroke="#111" stroke-width="0.9"/>
 </g>
 <path d="M-60,-59 L60,-59 L60,59 L-60,59 Z" fill="none" stroke="#111" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" /></g>
-<g transform="translate(3430 75)"><clipPath id="sg1"><rect x="-60" y="-59" width="120" height="118"/></clipPath>
-<g clip-path="url(#sg1)">
+<g transform="translate(3430 75)"><clipPath id="fill1"><rect x="-60" y="-59" width="120" height="118"/></clipPath>
+<g clip-path="url(#fill1)">
 <circle cx="-102" cy="-80" r="21" fill="#fff" stroke="#111" stroke-width="1.6"/>
 <circle cx="-102" cy="-80" r="14.28" fill="#fff" stroke="#111" stroke-width="0.9"/>
 <circle cx="-102" cy="-80" r="7.56" fill="#fff" stroke="#111" stroke-width="0.9"/>

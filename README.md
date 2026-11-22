@@ -6,7 +6,9 @@ Every recipe builds an actual-size tracing PDF, a simulated carved-and-finished 
 carvability check.
 
 - **Browse the elements:** [`catalog/catalog.pdf`](catalog/catalog.pdf), or the single-element SVGs in [`catalog/svg/`](catalog/svg/)
-- **Browse the designs:** [`designs/`](designs/), one folder per recipe
+- **Browse the designs:** [`designs/`](designs/), one folder per recipe:
+  Kamakura test section, Kamakura peony belt, camellia and cloud section, Sakura Ryūsui belt,
+  Sheridan rose section, basket-weave name belt
 
 ## What's in a design folder
 
@@ -28,6 +30,7 @@ python -m carvelib build recipes/*.yaml                        # all designs
 python -m carvelib catalog                                     # element catalog
 python -m carvelib list                                        # elements and size ranges
 python tools/knife_mark_stamp.py                               # regenerate the texture stamp STL
+python tools/preview_element.py camellia [size]               # one element, large, with relief
 ```
 
 ## Recipes
@@ -40,7 +43,7 @@ strap's centreline, positive **down**.
 name: Kamakura peony belt 1.5 x 36
 product: {type: belt, width: 1.5, length: 36, tip: round,
           buckle_slot: 1.5, keeper: 2.5, holes: {first: 29, count: 5, spacing: 1.0}}
-panel:   {start: 5.0, border: 0.16, ends: square, ground: knife_marks}   # ends: square | pointed
+panel:   {start: 5.0, border: 0.16, ends: square, ground: knife_marks}   # ends: square|pointed|round|ogee; ground: knife_marks|matte|none
 repeat:
   length: 4.6
   count: 5
@@ -55,12 +58,14 @@ repeat:
 extras:                          # placed once, outside the repeat
   - {element: seigaiha, at: [3.6, 0], size: 1.2}
 cuts: [1.71, 3.49]               # red cut lines (finish-test pieces)
+finishes: [natural_antique, saddle_tan, medium_brown]   # relief preview finishes
 ```
 
 - `repeat_from: other.yaml` borrows another recipe's repeat. The 36" Kamakura belt uses the
   test section's repeat, so improving the test section updates the belt too.
 - Placement options: `rotate` (degrees), `flip_x`, `flip_y`, `size` (inches, checked against the
   element's carvable range), `layer` (stacking order), `every`/`offset`/`skip_first`.
+- Finishes for `relief.png`: `red_black`, `oxblood_black`, `natural_antique`, `saddle_tan`, `medium_brown`, `dark_brown`.
 - `check:` overrides tool sizes for the carvability check, for example `{min_gap: 0.04, stamp_reach: 0.22, min_feature: 0.05}`.
 
 ## Elements
@@ -74,18 +79,40 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 - **Layer**: default stacking order (pommels < stalks < buds < stem < leaves < sheath < flower).
 - **Flow points**: where the knife-mark ground ripples around the element.
 
+**Japanese / Kamakura-bori inspired**
+
 | Element | What it is |
 |---|---|
-| `peony_open` | Open peony, three-quarter view, cupped, seeded centre (Kamakura-bori focal flower) |
-| `peony_bud` | Closed bud with sepals |
+| `peony_open` | Open peony, three-quarter view, cupped, seeded centre (focal flower) |
+| `camellia` | Camellia (tsubaki): round petals, cupped inner ring, stamen tube; simpler to carve than the peony |
+| `peony_bud` | Closed peony bud with sepals |
 | `botan_leaf` | Three-lobed peony leaf |
 | `guri_pommel` | Guri "sword-pommel" heart: paired scroll arms curling into spirals |
-| `guri_scroll` | One guri arm |
+| `guri_scroll` | One guri arm (also works as a Western C-scroll) |
 | `sheath` | Pointed bract where a stem branches |
+| `cloud_scroll` | Kamakura-bori cloud: curled lobes with spiral cuts and a streaming tail |
+| `karakusa_tendril` | Thin vine with two small leaves ending in a curl (filler) |
 | `wave_curl` | Free water swirl |
 | `sakura`, `sakura_petal` | Cherry blossom and falling petal |
+| `ume` | Plum blossom: five round petals, long stamens; carves well small |
 | `kiku` | Chrysanthemum |
+
+**Western / Sheridan**
+
+| Element | What it is |
+|---|---|
+| `sheridan_rose` | Wild rose: rolled-edge outer petals, cupped inner petals, crown and seeded centre |
+| `sheridan_leaf` | Curved leaf, smooth back, four swept lobes, tip that flips up |
+| `rose_bud` | Pointed bud sitting in a calyx |
+
+**Fills and frames**
+
+| Element | What it is |
+|---|---|
 | `seigaiha` | Wave-scale panel |
+| `asanoha` | Hemp-leaf star panel |
+| `basketweave` | Basket-weave layout panel (stamp with a basket stamp) |
+| `mokko_cartouche` | Four-lobed name frame for initials or a name (option `text` shows a grey placement guide) |
 
 To add an element: copy a class from `carvelib/elements/`, give it a new `name`, draw it around
 the origin at `size`, declare its size range, anchors and layer, and run `python -m carvelib catalog`.

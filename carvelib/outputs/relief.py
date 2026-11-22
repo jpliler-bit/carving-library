@@ -6,11 +6,17 @@ from PIL import Image, ImageFilter, ImageDraw, ImageFont
 from ..geometry import BG, MARK, f
 from .common import rasterize, uniquify
 
-FINISHES = {
-    "A  Red + black antique (hikuchi-nuri look)": ((176, 52, 36), (28, 14, 12)),
-    "B  Oxblood + black antique": ((98, 30, 30), (22, 12, 10)),
-    "C  Natural + dark antique": ((214, 176, 132), (70, 44, 26)),
+# name -> (dye on the high spots, antique in the recesses)
+PALETTE = {
+    "red_black": ("Red + black antique (hikuchi-nuri look)", (176, 52, 36), (28, 14, 12)),
+    "oxblood_black": ("Oxblood + black antique", (98, 30, 30), (22, 12, 10)),
+    "natural_antique": ("Natural + dark antique", (214, 176, 132), (70, 44, 26)),
+    "saddle_tan": ("Saddle tan + dark brown antique", (176, 112, 58), (52, 30, 16)),
+    "medium_brown": ("Medium brown + black antique", (120, 72, 40), (26, 16, 10)),
+    "dark_brown": ("Dark brown + black antique", (78, 48, 30), (16, 10, 8)),
 }
+DEFAULT = ["red_black", "oxblood_black", "natural_antique"]
+FINISHES = {f"{chr(65 + i)}  {PALETTE[k][0]}": PALETTE[k][1:] for i, k in enumerate(DEFAULT)}
 
 
 def height_map(d, dpi):
@@ -35,7 +41,11 @@ def render(h, dpi, high, low):
     return Image.fromarray((np.clip(col, 0, 1) * 255).astype(np.uint8))
 
 
-def preview(d, out_png, dpi=None, finishes=FINISHES):
+def preview(d, out_png, dpi=None, finishes=None):
+    """Recipe key `finishes:` picks from PALETTE, e.g. [natural_antique, saddle_tan, medium_brown]."""
+    if finishes is None:
+        keys = d.r.get("finishes", DEFAULT)
+        finishes = {f"{chr(65 + i)}  {PALETTE[k][0]}": PALETTE[k][1:] for i, k in enumerate(keys)}
     dpi = dpi or (240 if d.Lp <= 1200 else 90)
     h = height_map(d, dpi)
     imgs = [(name, render(h, dpi, *cols)) for name, cols in finishes.items()]
