@@ -1,0 +1,48 @@
+# "Sakura Ryusui" (cherry blossom & flowing water) - the first belt design, rebuilt from the library.
+# A wavy water ribbon with spiral ends; cherry blossoms alternate with chrysanthemums along it.
+
+name: Sakura Ryusui belt 1.5 x 36
+
+product:
+  type: belt
+  width: 1.5
+  length: 36
+  tip: round
+  buckle_slot: 1.5
+  keeper: 2.5
+  holes: {first: 29, count: 5, spacing: 1.0}
+
+panel:
+  start: 5.0
+  border: 0.16
+  ends: pointed
+  ground: knife_marks
+
+repeat:
+  length: 4.6
+  count: 5
+  stems:
+    - style: ribbon
+      width: 0.17
+      extend: 0
+      spiral_start: true
+      spiral_end: true
+      points: [[0.0, -0.3], [0.575, -0.212], [1.15, 0.0], [1.725, 0.212], [2.3, 0.3],
+               [2.875, 0.212], [3.45, 0.0], [4.025, -0.212], [4.6, -0.3]]
+  place:
+    # main flower alternates: sakura in repeats 1, 3, 5 / kiku in 2, 4
+    - {element: sakura, at: [1.23, 0], size: 0.94, every: 2}
+    - {element: kiku,   at: [1.23, 0], size: 0.92, every: 2, offset: 1}
+    - {element: sakura, at: [3.49, 0.04], size: 0.60}
+    # wave swirls in the pockets above and below the ribbon
+    - {element: wave_curl, at: [-0.30, -0.12], skip_first: true}
+    - {element: wave_curl, at: [2.00, 0.12], flip_y: true}
+    # falling petals
+    - {element: sakura_petal, at: [2.70, -0.39], rotate: -25}
+    - {element: sakura_petal, at: [0.62, 0.37], rotate: 160, size: 0.18}
+    - {element: sakura_petal, at: [1.85, 0.47], rotate: 200, size: 0.14}
+    - {element: sakura_petal, at: [3.95, -0.30], rotate: 35, size: 0.15}
+
+extras:
+  - {element: seigaiha, at: [3.6, 0], size: 1.2}
+  - {element: seigaiha, at: [34.3, 0], size: 1.2}

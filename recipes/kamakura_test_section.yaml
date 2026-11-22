@@ -1,0 +1,46 @@
+# Kamakura-bori inspired test section (v2): peony between guri pommels.
+# One 4.6" repeat on a 5.2" x 1.5" blank. Carve, then cut at the red lines into A / B / C
+# and try one finish on each piece.
+#
+# Coordinates are inches. x: from the left end (inside `repeat`, from the start of the repeat).
+# y: from the strap centreline, positive DOWN.
+
+name: Kamakura test section v2
+
+product:
+  type: blank
+  width: 1.5
+  length: 5.2
+  crease: false
+
+panel:
+  start: 0.3
+  border: 0.16
+  ends: square
+  ground: knife_marks
+
+repeat:
+  length: 4.6
+  count: 1
+
+  stems:
+    - points: [[0, 0], [0.30, 0], [0.70, 0.01], [1.10, 0.03], [1.50, 0.02], [1.90, 0.01], [2.30, 0],
+               [2.70, -0.01], [3.10, -0.02], [3.50, -0.03], [3.90, -0.01], [4.30, 0], [4.60, 0]]
+      width: 0.125
+
+  place:
+    - {id: pommel_left,  element: guri_pommel, at: [0.30, 0]}
+    - {id: pommel_right, element: guri_pommel, at: [4.30, 0], rotate: 180}
+    - {element: sheath, at: [0.30, 0], flip_x: true}
+    - {element: sheath, at: [4.30, 0.02]}
+    - {id: bud_low,  element: peony_bud, at: [1.62, 0.37], rotate: 60}
+    - {id: bud_high, element: peony_bud, at: [2.96, -0.35], rotate: -100}
+    - {element: botan_leaf, at: [1.46, -0.02], rotate: -52.4, size: 0.66}
+    - {element: botan_leaf, at: [3.14, 0.04], rotate: 127.6, size: 0.66}
+    - {id: peony, element: peony_open, at: [2.30, -0.03], size: 1.30}
+
+  connect:   # bud stalks grow out from under the stem
+    - {from: [1.50, 0.01], to: bud_low.base, start_dir: 90, width: 0.06, end_width: 0.05, line: false}
+    - {from: [3.04, 0.01], to: bud_high.base, start_dir: -90, width: 0.06, end_width: 0.05, line: false}
+
+cuts: [1.71, 3.49]   # finish-test pieces A | B | C

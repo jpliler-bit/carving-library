@@ -1,0 +1,24 @@
+# Full 1.5" x 36" belt built from the Kamakura test section's repeat (5 repeats = 23").
+# Change the test section and this belt follows. If 36" is the waist size, set length to ~41,
+# count to 6, and move the holes out by 4.6".
+
+name: Kamakura peony belt 1.5 x 36
+
+product:
+  type: belt
+  width: 1.5
+  length: 36
+  tip: round
+  buckle_slot: 1.5
+  keeper: 2.5
+  holes: {first: 29, count: 5, spacing: 1.0}
+
+panel:
+  start: 5.0
+  border: 0.16
+  ends: square
+  ground: knife_marks
+
+repeat_from: kamakura_test_section.yaml
+repeat:
+  count: 5
