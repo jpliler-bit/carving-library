@@ -1,0 +1,22 @@
+# Custom outline example: a shield-shaped tag / patch with a sakura and two falling petals.
+# Outline points are inches from the top-left corner; they are smoothed into a curve.
+
+name: Custom tag - sakura
+
+product:
+  type: custom
+  points: [[0.25, 0.05], [1.4, 0.15], [2.55, 0.05], [2.75, 1.2], [2.3, 2.35], [1.4, 3.05], [0.5, 2.35], [0.05, 1.2]]
+  margin: 0.22
+  stitch: true
+
+panels:
+  main: {ground: knife_marks, border_style: double}
+
+layout:
+  - type: single
+    origin: [1.4, 0]
+    place:
+      - {element: sakura, at: [0, -0.15], size: 1.25}
+      - {element: sakura_petal, at: [0.50, 0.66], rotate: 40, size: 0.22}
+      - {element: sakura_petal, at: [-0.55, 0.62], rotate: 150, size: 0.20}
+      - {element: sakura_petal, at: [0.0, 1.0], rotate: 95, size: 0.18}

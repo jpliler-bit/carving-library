@@ -1,0 +1,22 @@
+# 4" round coaster: chrysanthemum centre ringed by six plum blossoms and karakusa tendrils
+# (radial layout: one sixth is drawn, then rotated six times).
+
+name: Coaster - kiku radial
+
+product: {type: coaster, width: 4.0, margin: 0.22}
+
+panels:
+  main: {ground: knife_marks, border_style: double}
+
+layout:
+  - type: single
+    origin: [2.0, 0]
+    place:
+      - {element: kiku, at: [0, 0], size: 1.25}
+  - type: radial
+    count: 6
+    start_angle: -90
+    place:
+      - {element: karakusa_tendril, at: [0.56, 0.16], rotate: 22, size: 0.72}
+      - {element: ume, at: [1.30, -0.02], size: 0.58, rotate_petals: 0}
+      - {element: sakura_petal, at: [1.10, 0.56], rotate: 70, size: 0.18}

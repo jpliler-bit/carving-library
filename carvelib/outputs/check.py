@@ -59,8 +59,9 @@ def run(d, out_png):
     if ground.sum() == 0:
         return "Carvability check: no carved panel with open ground in this design (fills and stamped areas only).\n"
     g = ground.sum()
-    tool = ("the knife-mark stamp" if d.r.get("panel", {}).get("ground", "knife_marks") == "knife_marks"
-            else "a standard backgrounder")
+    grounds = {p["ground"] for p in d.panels.values()} - {"none"}
+    tool = ("the knife-mark stamp" if grounds == {"knife_marks"} else
+            "a standard backgrounder" if grounds == {"matte"} else "the stamp or a standard backgrounder")
     n_tight = ndimage.label(tight)[1]
     n_thin = ndimage.label(thin)[1]
     lines = [

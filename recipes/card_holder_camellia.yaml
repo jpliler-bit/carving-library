@@ -1,0 +1,22 @@
+# Card holder front: camellia centre with mirrored karakusa tendrils, plum blossoms and clouds.
+# Kamakura-bori inspired; knife-mark ground; double border.
+
+name: Card holder - camellia
+
+product: {type: card_holder, width: 4.25, height: 3.0}
+
+panels:
+  main: {ground: knife_marks, border_style: double}
+
+layout:
+  - type: single
+    origin: [2.125, 0]
+    place:
+      - {element: camellia, at: [0, 0.04], size: 1.30}
+  - type: mirror          # copied left-right about the panel centre
+    axis: x
+    place:
+      - {element: karakusa_tendril, at: [0.55, -0.06], rotate: -22, size: 0.88}
+      - {element: cloud_scroll, at: [0.78, 0.66], rotate: 180, size: 0.95, flip_y: true}
+      - {element: ume, at: [1.33, -0.60], size: 0.56}
+      - {element: sakura_petal, at: [1.48, 0.18], rotate: 30, size: 0.20}

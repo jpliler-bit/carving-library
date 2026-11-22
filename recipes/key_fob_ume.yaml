@@ -1,0 +1,29 @@
+# Loop key fob: plum blossom with karakusa tendrils on the face half, a small plum on the back half.
+# Laid flat; folds at the centre around the key ring; riveted near both ends.
+
+name: Key fob - ume
+
+product: {type: key_fob, width: 5.0, height: 1.0}
+
+panels:
+  face: {ground: knife_marks, border_style: line}
+  back: {ground: knife_marks, border_style: line}
+
+layout:
+  - type: mirror
+    panel: face
+    axis: x
+    place:
+      - {element: karakusa_tendril, at: [0.20, 0.10], rotate: -6, size: 0.58, flip_y: true}
+  - type: single
+    panel: face
+    origin: [1.57, 0]
+    place:
+      - {element: ume, at: [0, 0], size: 0.64}
+  - type: single
+    panel: back
+    origin: [3.43, 0]
+    place:
+      - {element: ume, at: [0, 0], size: 0.50, rotate_petals: -54}
+      - {element: sakura_petal, at: [0.50, 0.12], rotate: 20, size: 0.16}
+      - {element: sakura_petal, at: [-0.50, -0.12], rotate: 200, size: 0.16}

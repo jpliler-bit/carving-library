@@ -1,0 +1,38 @@
+# 2.5" x 40" guitar strap: Sakura Ryusui water ribbon with sakura and kiku, seigaiha at both ends.
+# The strap product carries its own panel; the repeat runs along it.
+
+name: Guitar strap - Sakura Ryusui 2.5 x 40
+
+product: {type: strap, width: 2.5, length: 40, ends: round, rivets: [1.0, 39.0]}
+
+panels:
+  body: {shape: strap, start: 4.6, length: 30.8, border: 0.25, ends: ogee, ground: knife_marks}
+
+layout:
+  - type: repeat
+    panel: body
+    start: 4.6
+    length: 6.16
+    count: 5
+    stems:
+      - style: ribbon
+        width: 0.24
+        extend: 0
+        spiral_start: true
+        spiral_end: true
+        points: [[0.0, -0.42], [0.77, -0.30], [1.54, 0.0], [2.31, 0.30], [3.08, 0.42],
+                 [3.85, 0.30], [4.62, 0.0], [5.39, -0.30], [6.16, -0.42]]
+    place:
+      - {element: sakura, at: [1.62, 0.0], size: 1.25, every: 2}
+      - {element: kiku, at: [1.62, 0.0], size: 1.25, every: 2, offset: 1}
+      - {element: sakura, at: [4.66, 0.06], size: 0.95}
+      - {element: wave_curl, at: [2.95, 0.20], size: 0.70, flip_y: true}
+      - {element: wave_curl, at: [-0.15, -0.20], size: 0.70, skip_first: true}
+      - {element: sakura_petal, at: [3.55, -0.62], rotate: -25, size: 0.26}
+      - {element: sakura_petal, at: [0.80, 0.55], rotate: 160, size: 0.24}
+      - {element: sakura_petal, at: [5.35, 0.38], rotate: 60, size: 0.20}
+      - {element: ume, at: [3.10, -0.55], size: 0.42}
+
+extras:
+  - {element: seigaiha, at: [2.75, 0], size: 2.3, height: 2.0, scale: 0.26}
+  - {element: seigaiha, at: [37.25, 0], size: 2.3, height: 2.0, scale: 0.26}

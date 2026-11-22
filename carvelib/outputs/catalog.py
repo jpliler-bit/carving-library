@@ -4,7 +4,7 @@ import math
 import os
 import textwrap
 from ..element import REGISTRY
-from ..geometry import f, HARDWARE
+from ..geometry import f, HARDWARE, BG as BG_
 from .common import to_pdf, uniquify
 
 PW, PH = 1100, 850
@@ -78,7 +78,7 @@ def build(out_dir):
     per_page = 6
     pages = []
     for p in range(0, len(els), per_page):
-        o = [f'<text x="50" y="55" font-size="22" font-weight="bold" fill="#222" {F}>Carving element library</text>',
+        o = [f'<text x="50" y="55" font-size="22" font-weight="bold" fill="#222" {F}>Carving elements</text>',
              f'<text x="50" y="78" font-size="12" fill="#555" {F}>Each element at its default size (print at 100%). '
              f'Red dots = anchors where stems attach; the tick shows the direction a stem leaves.</text>']
         for i, el in enumerate(els[p:p + per_page]):
@@ -87,5 +87,45 @@ def build(out_dir):
             o.append(_cell(el, cx, cy, p + i))
         pages.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="8.5in" viewBox="0 0 {PW} {PH}">'
                      f'<rect width="{PW}" height="{PH}" fill="#fff"/>{"".join(o)}</svg>')
+    pages.append(products_page())
     to_pdf(pages, os.path.join(out_dir, "catalog.pdf"))
     print(f"catalog: {len(els)} elements -> {out_dir}/catalog.pdf and {out_dir}/svg/")
+
+
+def products_page():
+    """One page showing every product shape with its default panels, folds, stitching and marks."""
+    from ..products import PRODUCTS
+    from ..assemble import poly_d
+    o = [f'<text x="50" y="55" font-size="22" font-weight="bold" fill="#222" {F}>Products</text>',
+         f'<text x="50" y="78" font-size="12" fill="#555" {F}>Product shapes at reduced size. Grey = default carving panels '
+         f'(use them by name under panels:). Dashed = stitching, dash-dot = folds, red = hardware.</text>']
+    names = [n for n in PRODUCTS if n != "custom"]
+    cols, cw, ch = 4, 250, 232
+    for i, n in enumerate(names):
+        pr = PRODUCTS[n]({})
+        cx, cy = 50 + (i % cols) * cw, 100 + (i // cols) * ch
+        x0, y0, x1, y1 = pr.outline.bounds
+        s = min((cw - 30) / (x1 - x0 + 20), (ch - 75) / (y1 - y0 + 20))
+        g = [f'<path d="{poly_d(pr.outline)}" fill="#fff" stroke="#111" stroke-width="{2/s:.2f}"/>']
+        shown = {k: v for k, v in pr.panels.items() if k != "whole"} or pr.panels
+        for name, poly in shown.items():
+            g.append(f'<path d="{poly_d(poly)}" fill="{BG_}" stroke="#111" stroke-width="{1/s:.2f}"/>')
+            c = poly.representative_point()
+            g.append(f'<text x="{c.x:.1f}" y="{c.y:.1f}" font-size="{11/s:.1f}" text-anchor="middle" fill="#555" {F}>{name}</text>')
+        for kind, pts in pr.folds:
+            g.append('<path d="M' + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) +
+                     f'" fill="none" stroke="#666" stroke-width="{0.8/s:.2f}" stroke-dasharray="{(6 if kind == "crease" else 10)/s:.1f} {4/s:.1f}"/>')
+        for pts in pr.stitch:
+            g.append('<path d="M' + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) +
+                     f'" fill="none" stroke="#555" stroke-width="{0.8/s:.2f}" stroke-dasharray="{3/s:.1f} {3/s:.1f}"/>')
+        g += pr.marks
+        o.append(f'<rect x="{cx}" y="{cy}" width="{cw - 15}" height="{ch - 12}" fill="none" stroke="#ccc"/>')
+        o.append(f'<text x="{cx + 10}" y="{cy + 20}" font-size="13" font-weight="bold" fill="#222" {F}>{n}</text>')
+        w_in, h_in = (x1 - x0) / 100, (y1 - y0) / 100
+        o.append(f'<text x="{cx + 10}" y="{cy + 35}" font-size="9.5" fill="#666" {F}>default {w_in:.4g}" × {h_in:.4g}"'
+                 f'{" · also: whole" if "whole" in pr.panels else ""}</text>')
+        o.append(f'<g transform="translate({cx + (cw - 15 - (x1 - x0) * s) / 2 - x0 * s:.1f} {cy + 45 - y0 * s:.1f}) scale({s:.4f})">{"".join(g)}</g>')
+    o.append(f'<text x="50" y="{100 + ((len(names) - 1) // cols + 1) * ch + 10}" font-size="11" fill="#555" {F}>'
+             f'Also: custom (any outline from points). Every product takes its own measurements — see README.</text>')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="8.5in" viewBox="0 0 {PW} {PH}">'
+            f'<rect width="{PW}" height="{PH}" fill="#fff"/>{"".join(o)}</svg>')

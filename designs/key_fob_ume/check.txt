@@ -1,0 +1,5 @@
+Carvability check (tools: min gap 0.04", stamp reach 0.22", min raised width 0.05")
+  Ground reachable with the knife-mark stamp: 70%
+  Ground needing a small backgrounder (orange): 29%
+  Gaps too tight for any backgrounder (red): 12 spot(s), 0.6% of ground
+  Thin raised parts (blue): 4 spot(s) - mostly scroll tails and petal tips; bevel these lightly

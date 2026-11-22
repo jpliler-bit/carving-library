@@ -1,0 +1,27 @@
+# Notebook cover (fits a 3.5 x 5.5 pocket notebook), laid flat: back left, spine, front right.
+# Front: camellia with clouds in all four corners. Back: asanoha panel.
+
+name: Notebook cover - camellia and clouds
+
+product: {type: notebook_cover, width: 8.0, height: 5.75}
+
+panels:
+  front: {ground: knife_marks, border_style: double}
+  back: {ground: none, border_style: line}
+
+layout:
+  - type: single
+    panel: front
+    origin: [6.10, 0]
+    place:
+      - {element: camellia, at: [0, 0], size: 1.70}
+  - type: corners
+    panel: front
+    place:
+      - {element: cloud_scroll, at: [0.88, 0.42], size: 1.10, rotate: 180, flip_y: true}
+      - {element: ume, at: [0.40, 1.05], size: 0.50}
+  - type: single
+    panel: back
+    origin: [1.90, 0]
+    place:
+      - {element: asanoha, at: [0, 0], size: 3.50}

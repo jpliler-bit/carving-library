@@ -1,0 +1,35 @@
+# Bifold wallet outer shell: Sheridan rose corner pattern on the front (two diagonal corners) around
+# a name cartouche; basket weave on the back; beaded borders. Laid flat: back half left, front half right.
+
+name: Bifold wallet - Sheridan corners
+
+product: {type: bifold_wallet, width: 8.75, height: 3.625}
+
+panels:
+  front: {ground: matte, border_style: beaded}
+  back: {ground: none, border_style: beaded}
+
+finishes: [natural_antique, saddle_tan, medium_brown]
+
+layout:
+  - type: corners          # drawn for the top-left corner; copied (mirrored) into the bottom-right
+    panel: front
+    corners: [tl, br]
+    place:
+      - {element: guri_scroll, at: [1.12, 0.92], rotate: 18, size: 0.95}
+      - {element: sheridan_leaf, at: [1.08, 0.40], rotate: -6, size: 1.00, flip_y: true}
+      - {element: sheridan_leaf, at: [0.36, 1.02], rotate: 98, size: 0.92}
+      - {id: bud, element: rose_bud, at: [2.18, 0.42], rotate: -8, size: 0.40}
+      - {element: sheridan_rose, at: [0.70, 0.66], size: 1.18}
+    connect:
+      - {from: [1.20, 0.56], to: bud.base, start_dir: -12, width: 0.07, end_width: 0.05, line: false}
+  - type: single
+    panel: front
+    origin: [6.55, 0]
+    place:
+      - {element: mokko_cartouche, at: [0, 0], size: 1.45, height: 0.85, text: JPL}
+  - type: single
+    panel: back
+    origin: [2.19, 0]
+    place:
+      - {element: basketweave, at: [0, 0], size: 3.55, height: 2.78}
