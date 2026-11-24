@@ -131,6 +131,12 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 | `bamboo` | Jointed bamboo stalk with two sprays of narrow leaves |
 | `nami_crest` | Wave crest: a swelling band that curls over, with foam claws |
 | `tombo` | Dragonfly seen from above (the samurai "victory insect") |
+| `koi` | Koi from above: curving body, scale cuts, fins, split tail |
+| `tsuru` | Crane in flight: feathered wings, long neck, crown spot, trailing legs |
+| `cho` | Butterfly: rounded forewings, tailed hindwings, eye spots, curled antennae |
+| `usagi` | Sitting rabbit (moon rabbit), ears laid back |
+| `mitsudomoe` | Three swirling commas, a classic crest (`ring: true` adds a ring) |
+| `sensu` | Open folding fan with pleats, slats and pivot |
 
 **Western / Sheridan**
 
@@ -143,6 +149,10 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 | `acorn` | Acorn with a crosshatched cap and stem |
 | `daisy` | Two rings of narrow petals around a large seeded centre |
 | `feather` | Curved quill, split vane, fine barb cuts |
+| `horse_head` | Horse head and neck, side view, with flowing mane |
+| `longhorn_skull` | Texas longhorn skull with sweeping horns |
+| `lone_star` | Beveled five-point star (`ring: true` for a concho-style ring) |
+| `horseshoe` | Horseshoe opening up, with groove, nail holes and calks |
 
 **Fills and frames**
 
@@ -154,6 +164,7 @@ Each element lives in `carvelib/elements/` and follows one format (`carvelib/ele
 | `kikko` | Tortoise-shell hexagons with inner hexagons |
 | `shippo` | Overlapping circles (seven treasures) |
 | `maru_ring` | Round crest frame (kamon ring); put a motif or a radial set of leaves inside |
+| `hishi_frame` | Diamond frame with a raised double-line border |
 | `mokko_cartouche` | Four-lobed name frame for initials or a name (option `text` shows a grey placement guide) |
 
 To add an element: copy a class from `carvelib/elements/`, give it a new `name`, draw it around

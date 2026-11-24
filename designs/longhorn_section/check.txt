@@ -1,0 +1,5 @@
+Carvability check (tools: min gap 0.04", stamp reach 0.22", min raised width 0.05")
+  Ground reachable with a standard backgrounder: 88%
+  Ground needing a small backgrounder (orange): 11%
+  Gaps too tight for any backgrounder (red): 8 spot(s), 0.3% of ground
+  Thin raised parts (blue): 27 spot(s) - mostly scroll tails and petal tips; bevel these lightly

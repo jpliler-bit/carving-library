@@ -1,0 +1,23 @@
+# Loop key fob, Western: ringed lone star on the face, horseshoe on the back. Matte ground.
+
+name: Key fob - Texas
+
+product: {type: key_fob, width: 5.0, height: 1.0}
+
+panels:
+  face: {ground: matte, border_style: rope}
+  back: {ground: matte, border_style: rope}
+
+finishes: [natural_antique, saddle_tan, dark_brown]
+
+layout:
+  - type: single
+    panel: face
+    origin: [1.57, 0]
+    place:
+      - {element: lone_star, at: [0, 0], size: 0.66, ring: true}
+  - type: single
+    panel: back
+    origin: [3.43, 0]
+    place:
+      - {element: horseshoe, at: [0, -0.04], size: 0.58}

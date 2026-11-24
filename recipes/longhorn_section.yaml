@@ -1,0 +1,23 @@
+# Western test section: Texas longhorn skull between beveled lone stars and horseshoes,
+# rope border, matte ground. 5.2" x 1.5" blank.
+
+name: Longhorn section
+
+product: {type: blank, width: 1.5, length: 5.2, crease: false}
+
+panels:
+  main: {shape: strap, start: 0.3, length: 4.6, border: 0.10, ground: matte, border_style: rope}
+
+finishes: [natural_antique, saddle_tan, dark_brown]
+
+layout:
+  - type: single
+    origin: [2.6, 0]
+    place:
+      - {element: longhorn_skull, at: [0, 0.08], size: 1.85}
+  - type: mirror
+    axis: x
+    place:
+      - {element: lone_star, at: [1.38, 0.16], size: 0.52}
+      - {element: horseshoe, at: [1.88, -0.03], size: 0.50}
+      - {element: lone_star, at: [1.22, -0.28], size: 0.36}

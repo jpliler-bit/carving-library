@@ -1,0 +1,20 @@
+# 4" coaster: two koi chasing each other round a mitsudomoe crest, with wave swirls.
+
+name: Coaster - koi
+
+product: {type: coaster, width: 4.0, margin: 0.20}
+
+panels:
+  main: {ground: knife_marks, border_style: double}
+
+layout:
+  - type: single
+    origin: [2.0, 0]
+    place:
+      - {element: mitsudomoe, at: [0, 0], size: 0.70}
+  - type: radial
+    count: 2
+    start_angle: 0
+    place:
+      - {element: koi, at: [0.95, 0.10], rotate: 100, size: 1.75}
+      - {element: wave_curl, at: [0.40, -1.25], rotate: 200, size: 0.42}

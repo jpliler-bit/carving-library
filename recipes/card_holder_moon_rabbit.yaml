@@ -1,0 +1,18 @@
+# Card holder front: the moon rabbit (tsuki no usagi) inside a moon ring, a crane flying toward it,
+# and a cloud below. Kamakura-bori inspired.
+
+name: Card holder - moon rabbit
+
+product: {type: card_holder, width: 4.25, height: 3.0}
+
+panels:
+  main: {ground: knife_marks, border_style: double}
+
+layout:
+  - type: single
+    origin: [2.125, 0]
+    place:
+      - {element: maru_ring, at: [-0.72, -0.05], size: 1.95, thickness: 0.10}
+      - {element: usagi, at: [-0.70, 0.12], size: 1.20}
+      - {element: tsuru, at: [0.92, -0.25], size: 1.45, flip_x: true, rotate: 8}
+      - {element: cloud_scroll, at: [0.95, 0.75], size: 0.95, rotate: 180, flip_y: true}
